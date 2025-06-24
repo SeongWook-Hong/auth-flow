@@ -1,8 +1,8 @@
-import AuthInput from '@/components/auth/AuthInput';
+import AuthInput from "@/components/auth/AuthInput";
 
 export default function Login() {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col items-center justify-center min-h-screen">
       <div className="m-auto px-4">
         <AuthInput
           id="email"
