@@ -7,10 +7,17 @@ interface Props {
 }
 
 const AuthInput = ({ id, type, label }: Props) => {
-  const [value, setValue] = useState("");
   const [isFocused, setIsFocused] = useState(false);
+  const [isFloating, setIsFloating] = useState(false);
 
-  const isFloating = value.length > 0 || isFocused;
+  const handleFocus = () => {
+    setIsFocused(true);
+  };
+
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    setIsFocused(false);
+    setIsFloating(e.target.value.length > 0);
+  };
   return (
     <div
       tabIndex={0}
@@ -20,15 +27,13 @@ const AuthInput = ({ id, type, label }: Props) => {
         className="peer focus:outline-none"
         id={id}
         type={type}
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-        onFocus={() => setIsFocused(true)}
-        onBlur={() => setIsFocused(false)}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
       />
       <label
         htmlFor={id}
         className={`absolute left-4 transition-all text-gray-500 ${
-          isFloating ? "top-1 text-sm" : "top-4 text-base"
+          isFloating || isFocused ? "top-1 text-sm" : "top-4 text-base"
         }`}
       >
         {label}
