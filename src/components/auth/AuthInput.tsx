@@ -4,9 +4,10 @@ interface Props {
   id: "email" | "password" | "confirmPassword";
   type: "email" | "password";
   label: string;
+  children?: React.ReactNode;
 }
 
-const AuthInput = ({ id, type, label }: Props) => {
+const AuthInput = ({ id, type, label, children }: Props) => {
   const [isFocused, setIsFocused] = useState(false);
   const [isFloating, setIsFloating] = useState(false);
 
@@ -38,6 +39,7 @@ const AuthInput = ({ id, type, label }: Props) => {
       >
         {label}
       </label>
+      {children}
     </div>
   );
 };
